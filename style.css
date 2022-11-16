@@ -14,8 +14,10 @@ body {
     display: flex;
     flex-direction: column;
     background-color: rgb(41, 52, 58);
+    background-color: rgb(32, 41, 46);
     font-family:'Open Sans', sans-serif;
     color: rgb(202, 225, 238);
+    color: rgb(255, 255, 255);
     font-size: 48px;
     align-items: center;
     justify-content: center;
@@ -41,7 +43,7 @@ body {
     
 }
 
-.holder {
+.holder, .initiate {
     align-self: center;
     display: flex;
     flex-direction: column;
@@ -49,10 +51,15 @@ body {
     text-align: center;
     padding: 20px;
     border: solid 1px rgb(154, 173, 184);
+    border: solid 1px rgb(46, 58, 65);
     border-radius: 20px;
     height: 260px;
     gap: 8px;
+    background-color: rgb(32, 41, 46);
+    background-color: rgb(41, 52, 58);
 }
+
+
 
 .display{
     /* width: 20px;
@@ -69,6 +76,8 @@ body {
     height: 260px;
     padding: 16px;
     border: solid 1px rgb(154, 173, 184);
+    border: solid 1px rgb(135, 152, 161);
+    background-color: rgb(41, 52, 58);
     border-radius: 20px;
 }
 .grid {
@@ -128,10 +137,14 @@ form>div {
 }
 
 .ui>div, .button, .btn {
-    border: solid 1px rgb(154, 173, 184);
+    background-color: rgb(35, 44, 48);
+    /* border: solid 1px rgb(154, 173, 184);
+    border: solid 1px rgb(100, 113, 121); */
     border-radius: 8px;
     padding: 6px;
-    font-size: 1rem;
+    font-size: .8rem;
+    font-weight: 600;
+    
 }
 
 .message-board {
@@ -139,7 +152,13 @@ form>div {
 }
 
 table {
-    height: 100px;
+    font-size: .2rem;
+    height: clamp(70px, 80px, 400px);
 
+}
+
+.initiate {
+    background-color: rgb(41, 52, 58);
+    height: auto;
 }
 
