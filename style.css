@@ -15,6 +15,7 @@ body {
     flex-direction: column;
     background-color: rgb(41, 52, 58);
     background-color: rgb(32, 41, 46);
+    background-image: radial-gradient( rgb(74, 90, 99) , rgb(32, 41, 46));
     font-family:'Open Sans', sans-serif;
     color: rgb(202, 225, 238);
     color: rgb(255, 255, 255);
@@ -31,7 +32,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-contents: center;
+    justify-content: center;
     gap: 30px;
     padding-top: 60px;
 }
@@ -87,6 +88,7 @@ body {
     padding: 16px;
     border: solid 1px rgb(154, 173, 184);
     border: solid 1px rgb(135, 152, 161);
+    border: solid 1px rgb(87, 98, 104);
     background-color: rgb(41, 52, 58);
     border-radius: 16px;
 }
@@ -98,7 +100,7 @@ body {
     grid-template-rows: 1fr 1fr 1fr;
     font-size:3rem;
     text-align: center;
-    background-color: rgb(32, 41, 46);
+    /* background-color: rgb(32, 41, 46); */
     border-radius: 10px;
 }
 
