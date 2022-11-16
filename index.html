@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="title">Tic-Tac-Toe</div>
+        <div class="game-space">
+
+            <div class="game display holder ui">
+                <div class="player display player1">Player 1</div>
+                <div class="player display player2">Player 2</div>
+                <div class="score display">
+                    <table>Blah</table>
+                </div>
+            </div>
+
+            <div class="board">
+                <div class="grid">
+                    <div class="cell cell1"></div>
+                    <div class="cell cell2"></div>
+                    <div class="cell cell3"></div>
+                    <div class="cell cell4"></div>
+                    <div class="cell cell5"></div>
+                    <div class="cell cell6"></div>
+                    <div class="cell cell7"></div>
+                    <div class="cell cell8"></div>
+                    <div class="cell cell9"></div>
+                
+                </div>
+            </div>
+
+            <div class="ui display holder">
+                <div class="message-board">message-board
+
+                </div>
+                <div class="btn next-game">Next Game</div>
+                <div class="btn reset">Reset</div>
+                <div class="btn quit">Quit</div>
+
+            </div>
+
+        </div>
+        <div class="initiate btn">Start Game</div>
+    </div>
+
+    <div class="form holder">
+        <form>
+            <div class="form-title">New Game</div>
+            <div>
+                <label for="player-1">Player 1:</label>
+                <input type="text" id="player-1" name="player-1">
+            </div>
+            <div>
+                <label for="player-2">Player 2:</label>
+                <input type="text" id="player-2" name="player-2">
+            </div>
+            <div class="rounds">Rounds:
+                <div>
+                    <label for="rounds5">5</label>
+                    <input type="checkbox" id="rounds" name="rounds">
+                    <label for="rounds5">10</label>
+                    <input type="checkbox" id="rounds" name="rounds">
+                    <label for="rounds5">Unlimited</label>
+                    <input type="checkbox" id="rounds" name="rounds">
+                </div>
+            </div>
+            <div class="form-btns">
+                <div class="button close">Close</div>
+                <div class="button add">Add Book</div>
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>
