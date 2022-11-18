@@ -71,18 +71,20 @@ const gameController = () => {
             if((marker1.textContent != ' ') && (marker2.textContent != ' ') && (marker3.textContent != ' ')){
                 if ((marker1.textContent === marker2.textContent) && (marker2.textContent === marker3.textContent)){
                     gameOver = true;
-                    console.log("they all match!")
-                    
+                    console.log("they all match!");   
                 }
             }
             
-        })
+        });
 
-        if(gameOver === true){
+        if(gameOver) {
+            console.log("game over!")
             let message = "We have a winner!"
             let messageBoard = document.getElementsByClassName('message-board');
+            console.log(messageBoard[0])
+            console.log(message)
             messageBoard[0].textContent = message;
-            alert("Game over")
+            endGame();
         }
 
     }
@@ -112,6 +114,9 @@ const gameController = () => {
     }
 
     const switchPlayer = () => {
+        if(gameOver){
+            return
+        }
         if(playerTurn === 1){
             playerTurn = 2;
         }
@@ -129,8 +134,17 @@ const gameController = () => {
         const divs = document.querySelectorAll('.cell'); 
         console.log()
         divs.forEach(div => div.addEventListener('click', checkAvailability));
+        
+        const nextGame = document.getElementById('next-game'); 
+        console.log(nextGame)
+        nextGame.addEventListener('click', startGame);
     }
 
+    const removeListeners = () => {
+        const divs = document.querySelectorAll('.cell'); 
+        console.log()
+        divs.forEach(div => div.removeEventListener('click', checkAvailability));
+    }
     const checkAvailability = (e) => {
         if (e.target.textContent === ' '){
             placeMarker(e);
@@ -142,8 +156,20 @@ const gameController = () => {
         }
     }
     
+    const startGame = () => {
+        console.log("starting game")
+        runGame.addListeners();
+        gameOver = false;
+        playsArray = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
+        updateBoard();
+    }
 
-    return {updateBoard, placeMarker, addListeners};
+    const endGame = () => {
+        removeListeners();
+
+    }
+
+    return {updateBoard, placeMarker, addListeners, startGame};
     
 };
 
@@ -168,7 +194,11 @@ const winsArray = [winsArrayObject.h1, winsArrayObject.h2,
     winsArrayObject.v2, winsArrayObject.v3,
     winsArrayObject.d1, winsArrayObject.d2];
 
-
 const runGame = gameController();
+let startBtn = document.getElementsByClassName('initiate');
+console.log(startBtn[0])
+startBtn[0].addEventListener('click', runGame.startGame);
+
+
 // runGame.updateBoard();
-runGame.addListeners();
+// runGame.addListeners();
