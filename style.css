@@ -165,6 +165,7 @@ form>div {
     padding: 20px;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .score div {

@@ -21,13 +21,6 @@ const players = playerArray(player1, player2);
 
 console.log(players.playerArray);
 
-
-// const gameBoard = () => {
-//     console.log('running gameboard')
-//     let playsArray = ['', '', '', '', '', '', '', '', ''];
-//     return {playsArray};
-// };
-
 const gameController = () => {
     console.log('running gamecontroller')
     let playsArray = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
@@ -37,12 +30,7 @@ const gameController = () => {
     const updateBoard = () => {
         index = 0;
         console.log("running updateBoard");
-        // let markers = playsArray;
-        // markers = Object.keys(markers);
-        // console.log(markers);
-        // console.log(typeof markers);
         playsArray.forEach(marker => {
-            // console.log(marker)
             console.log(index)
             let div = document.querySelector(`[data-index = '${index}']`);
             console.log("the div is: " + div)
@@ -51,6 +39,16 @@ const gameController = () => {
             index++;
             });
         };
+
+    const placeMarker = (e) => {
+        let isAvailable;
+        console.log("running place marker")
+        //checkIfAvailable
+        //checkTurnCounter
+        addToArray(e);
+        updateBoard();
+        switchPlayer();
+    }
 
     const getPlayer = () => {
         let thePlayer = 0;
@@ -71,10 +69,6 @@ const gameController = () => {
         let turn = getPlayer();
         let marker = turn.playerMarker;
         console.log("marker to add to array is: " + marker);
-        // let anArray = gameBoard();
-        // console.log(anArray);
-        // anArray = anArray.playsArray;
-        // console.log(anArray.playsArray);
         playsArray[boardSpaceIndex] = marker;
     }
 
@@ -95,17 +89,20 @@ const gameController = () => {
     const addListeners = () => {
         const divs = document.querySelectorAll('.cell'); 
         console.log()
-        divs.forEach(div => div.addEventListener('click', placeMarker));
+        divs.forEach(div => div.addEventListener('click', checkAvailability));
     }
 
-    const placeMarker = (e) => {
-        console.log("running place marker")
-        //checkIfAvailable
-        //checkTurnCounter
-        addToArray(e);
-        updateBoard();
-        switchPlayer();
+    const checkAvailability = (e) => {
+        if (e.target.textContent === ' '){
+            placeMarker(e);
+        }
+        else {
+        let message = "Please choose an available space."
+        let messageBoard = document.getElementsByClassName('message-board');
+        messageBoard[0].textContent = message;
+        }
     }
+    
 
     return {updateBoard, placeMarker, addListeners};
     
