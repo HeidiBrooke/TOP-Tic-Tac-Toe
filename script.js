@@ -25,29 +25,66 @@ const gameController = () => {
     console.log('running gamecontroller')
     let playsArray = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
     let playerTurn = 1;
+    let gameOver = false;
     
 
     const updateBoard = () => {
         index = 0;
         console.log("running updateBoard");
         playsArray.forEach(marker => {
-            console.log(index)
             let div = document.querySelector(`[data-index = '${index}']`);
-            console.log("the div is: " + div)
-            console.log("marking" + index + " " + marker)
             div.textContent = marker;
             index++;
             });
         };
 
     const placeMarker = (e) => {
-        let isAvailable;
-        console.log("running place marker")
-        //checkIfAvailable
-        //checkTurnCounter
+        console.log("running place marker");
         addToArray(e);
         updateBoard();
+        checkTurnCounter();
         switchPlayer();
+    }
+
+    const checkTurnCounter = () => {
+        console.log("checking turn counter!")
+        let thePlayer = getPlayer();
+        console.log("Turn tally is: " + thePlayer.turnTally)
+        if (thePlayer.turnTally >= 2){
+            console.log(thePlayer.playerName + " is making their 3rd move or later!")
+            checkForWin();
+        }
+    }
+
+    const checkForWin = () => {
+        console.log("checking for win!")
+        winsArray.forEach(array => {
+            let spaceIndex1 = array[0];
+            let spaceIndex2 = array[1];
+            let spaceIndex3 = array[2];
+            let marker1 = document.querySelector(`[data-index = '${spaceIndex1}']`);
+            let marker2 = document.querySelector(`[data-index = '${spaceIndex2}']`);
+            let marker3 = document.querySelector(`[data-index = '${spaceIndex3}']`);
+            console.log("spot 1 is: " + spaceIndex1 + ":" + marker1.textContent);
+            console.log("spot 2 is: " + spaceIndex2 + ":" + marker2.textContent);
+            console.log("spot 3 is: " + spaceIndex3 + ":" + marker3.textContent);
+            if((marker1.textContent != ' ') && (marker2.textContent != ' ') && (marker3.textContent != ' ')){
+                if ((marker1.textContent === marker2.textContent) && (marker2.textContent === marker3.textContent)){
+                    gameOver = true;
+                    console.log("they all match!")
+                    
+                }
+            }
+            
+        })
+
+        if(gameOver === true){
+            let message = "We have a winner!"
+            let messageBoard = document.getElementsByClassName('message-board');
+            messageBoard[0].textContent = message;
+            alert("Game over")
+        }
+
     }
 
     const getPlayer = () => {
@@ -70,6 +107,8 @@ const gameController = () => {
         let marker = turn.playerMarker;
         console.log("marker to add to array is: " + marker);
         playsArray[boardSpaceIndex] = marker;
+        turn.turnTally++;
+        console.log("the turn tally is now: " + turn.turnTally)
     }
 
     const switchPlayer = () => {
@@ -107,6 +146,28 @@ const gameController = () => {
     return {updateBoard, placeMarker, addListeners};
     
 };
+
+const defineWinsArrays = () => {
+    let h1 = [0, 1, 2];
+    let h2 = [3, 4, 5];
+    let h3 = [6, 7, 8];
+
+    let v1 = [0, 3, 6];
+    let v2 = [1, 4, 7];
+    let v3 = [2, 5, 8];
+
+    let d1 = [0, 4, 8];
+    let d2 = [6, 4, 2];
+
+    return {h1, h2, h3, v1, v2, v3, d1, d2};
+}
+
+const winsArrayObject = defineWinsArrays();
+const winsArray = [winsArrayObject.h1, winsArrayObject.h2, 
+    winsArrayObject.h3, winsArrayObject.v1,
+    winsArrayObject.v2, winsArrayObject.v3,
+    winsArrayObject.d1, winsArrayObject.d2];
+
 
 const runGame = gameController();
 // runGame.updateBoard();
