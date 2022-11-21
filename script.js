@@ -39,10 +39,12 @@ const gameController = () => {
     
 
     const updateBoard = () => {
+        console.log("plays array at time of update: " + playsArray)
         index = 0;
         console.log("running updateBoard");
         playsArray.forEach(marker => {
             let div = document.querySelector(`[data-index = '${index}']`);
+            console.log("div at time of update is: " + div)
             div.textContent = marker;
             index++;
             });
@@ -243,7 +245,7 @@ const gameController = () => {
         let roundIndex;
         let roundIndeces = [];
         rounds.forEach(round => {
-            roundIndex = round.dataset.index;
+            roundIndex = round.dataset.rndIndex;
             console.log("dataset value" + roundIndex )
             roundIndeces.push(roundIndex);
             }
@@ -253,12 +255,12 @@ const gameController = () => {
         
     scoreArray.forEach(score => {
         let i = scoreArray.indexOf(score);
-        let imIncluded = roundIndeces.includes(index);
-        index = index.toString();
+        i = i.toString();
+        let imIncluded = roundIndeces.includes(i);
         console.log(imIncluded)
-        console.log(index + "imIncluded in:  " + roundIndeces + "?")
-        if (roundIndeces.includes(index)) {
-            console.log(index + " is indcluded in " + roundIndeces )
+        console.log(i + "imIncluded in:  " + roundIndeces + "?")
+        if (roundIndeces.includes(i)) {
+            console.log(i + " is indcluded in " + roundIndeces )
             return;
         }
         else {
@@ -285,16 +287,19 @@ const gameController = () => {
     }
 
     const addTableData = (score, roundIndex) => {
-        let scoreTable = document.getElementById('score');
+        console.log(playsArray);
+        let table = document.getElementById('score');
         let roundRow = document.createElement('tr');
-        roundRow.dataset.index = roundIndex;
-        scoreTable.appendChild(roundRow);
+        roundRow.dataset.rndIndex = roundIndex;
+        console.log('the table element is: "'+ table);
         let player1Score = document.createElement('td');
         let player2Score = document.createElement('td');
+        table.appendChild(roundRow);
         roundRow.appendChild(player1Score);
         roundRow.appendChild(player2Score);
         player1Score.textContent = score.player1Score;
         player2Score.textContent = score.player2Score;
+        console.log(playsArray);
     }
 
     return {updateBoard, placeMarker, addListeners, startGame};
