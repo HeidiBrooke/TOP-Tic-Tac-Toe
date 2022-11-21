@@ -194,7 +194,7 @@ form>div {
     border-bottom: solid 1px rgb(76, 87, 94);
     text-transform: uppercase;
     font-weight: 400;
-    font-size: .7rem;
+    font-size: .6rem;
     /* border-style: hidden; */
 }
 
@@ -203,7 +203,7 @@ form>div {
     border: solid 1px rgb(76, 87, 94);
     text-transform: uppercase;
     font-weight: 200;
-    font-size: .8rem;
+    font-size: .7rem;
 }
 
 table {
