@@ -65,9 +65,11 @@ body {
     border: solid 1px rgb(46, 58, 65);
     border-radius: 16px;
     height: 260px;
+    width: 180px;
     gap: 8px;
     background-color: rgb(32, 41, 46);
     background-color: rgb(41, 52, 58);
+    text-overflow: wrap;
 }
 
 .initiate {
@@ -173,9 +175,12 @@ form>div {
 }
 
 .score div {
+    display: grid;
+    grid-template-columns: 1fr;
     text-transform: uppercase;
     letter-spacing: 5px;
     font-weight: 700;
+    
 }
 
 #score {
@@ -202,12 +207,9 @@ form>div {
 }
 
 table {
-    /* display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(8, 1fr);
-    font-size: .2rem; */
     padding: 8px;
     height: clamp(70px, 80px, 400px);
+    align-self: center;
 }
 
 .initiate {

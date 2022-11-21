@@ -5,15 +5,23 @@ const player = (type, name, marker) => {
     let wins = 0;
     let losses = 0;
     let turnTally = 0;
+    let gameScore;
 
     return {playerType, playerName, playerMarker, 
-        wins, losses, turnTally};
+        wins, losses, turnTally, gameScore};
 }
 
 const playerArray = (player1, player2) => {
     let playerArray = [player1, player2];
     return {playerArray};
 }
+
+// const gameScore = (round, winner, loser) => {
+//     let gameRound = round;
+//     let gameWinner = winner;
+//     let gameLoser = loser;
+//     return {gameRound, gameWinner, gameLoser};
+// }
 
 const player1 = player(1, 'Player 1', 'X');
 const player2 = player(2, 'Player 2', '0');
@@ -57,6 +65,7 @@ const gameController = () => {
     }
 
     const checkForWin = () => {
+        let winningMarker;
         console.log("checking for win!")
         winsArray.forEach(array => {
             let spaceIndex1 = array[0];
@@ -71,7 +80,9 @@ const gameController = () => {
             if((marker1.textContent != ' ') && (marker2.textContent != ' ') && (marker3.textContent != ' ')){
                 if ((marker1.textContent === marker2.textContent) && (marker2.textContent === marker3.textContent)){
                     gameOver = true;
-                    console.log("they all match!");   
+                    console.log("they all match!"); 
+                    winningMarker = marker1.textContent;
+                    console.log("winning marker is: " + winningMarker);  
                 }
             }
             
@@ -84,7 +95,7 @@ const gameController = () => {
             console.log(messageBoard[0])
             console.log(message)
             messageBoard[0].textContent = message;
-            endGame();
+            endGame(winningMarker);
         }
 
     }
@@ -93,6 +104,16 @@ const gameController = () => {
         let thePlayer = 0;
         players.playerArray.forEach(player => {
             if (playerTurn === player.playerType){  
+                thePlayer = player;
+            };
+        })
+        return thePlayer;
+    }
+
+    const getPlayerByType = (num) => {
+        let thePlayer;
+        players.playerArray.forEach(player => {
+            if (num === player.playerType){  
                 thePlayer = player;
             };
         })
@@ -138,6 +159,17 @@ const gameController = () => {
         const nextGame = document.getElementById('next-game'); 
         console.log(nextGame)
         nextGame.addEventListener('click', startGame);
+
+        const resetGame = document.getElementById('reset'); 
+        console.log(resetGame)
+        resetGame.addEventListener('click', gameReset);
+
+    }
+
+    const gameReset = () => {
+        console.log("reseting!")
+        gameOver = true;
+        startGame();
     }
 
     const removeListeners = () => {
@@ -161,11 +193,52 @@ const gameController = () => {
         runGame.addListeners();
         gameOver = false;
         playsArray = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
+        const gameScore = (1, null, null);
         updateBoard();
     }
 
-    const endGame = () => {
+    const endGame = (winner) => {
+        logScore(winner);
         removeListeners();
+
+    }
+
+    const logScore = (theWinner) => {
+        let gameWinner;
+        let gameLoser;
+        players.playerArray.forEach(player => {
+            if (theWinner === player.playerMarker){  
+                gameWinner = player;
+            }
+            else {
+                gameLoser = player;
+            }
+        })
+        
+        gameWinner.wins++;
+        gameWinner.gameScore = 'W';
+        gameLoser.losses++;
+        gameLoser.gameScore = 'L';
+        console.log(gameWinner.wins);
+        let firstPlayer = getPlayerByType(1);
+        let secondPlayer = getPlayerByType(2);
+        updateScoreBoard(firstPlayer, secondPlayer);
+    }
+
+    const updateScoreBoard = (player1, player2) => {
+        let score = document.getElementById('score');
+        let roundRow = document.createElement('tr');
+        score.appendChild(roundRow);
+        let player1Score = document.createElement('td');
+        let player2Score = document.createElement('td');
+        roundRow.appendChild(player1Score);
+        roundRow.appendChild(player2Score);
+        player1Score.textContent = player1.gameScore;
+        player2Score.textContent = player2.gameScore;
+        let player1Total = document.getElementById('player1-total');
+        let player2Total = document.getElementById('plaery2-total');
+        player1Total.textContent = player1.wins;
+        player2Total.textContent = player2.wins;
 
     }
 
