@@ -16,12 +16,11 @@ const playerArray = (player1, player2) => {
     return {playerArray};
 }
 
-// const gameScore = (round, winner, loser) => {
-//     let gameRound = round;
-//     let gameWinner = winner;
-//     let gameLoser = loser;
-//     return {gameRound, gameWinner, gameLoser};
-// }
+const gameScore = (score1, score2) => {
+    let player1Score = score1;
+    let player2Score = score2;
+    return  {player1Score, player2Score};
+}
 
 const player1 = player(1, 'Player 1', 'X');
 const player2 = player(2, 'Player 2', '0');
@@ -34,6 +33,9 @@ const gameController = () => {
     let playsArray = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
     let playerTurn = 1;
     let gameOver = false;
+    const newGame = gameScore();
+    console.log("new game score is: " + newGame);
+    let scoreArray = [];
     
 
     const updateBoard = () => {
@@ -222,24 +224,77 @@ const gameController = () => {
         console.log(gameWinner.wins);
         let firstPlayer = getPlayerByType(1);
         let secondPlayer = getPlayerByType(2);
-        updateScoreBoard(firstPlayer, secondPlayer);
+        updateScoreArray(firstPlayer, secondPlayer);
+        updateScoreBoard();
     }
 
-    const updateScoreBoard = (player1, player2) => {
-        let score = document.getElementById('score');
+    
+    const updateScoreArray = (player1, player2) => {
+        newGame.player1Score = player1.gameScore;
+        newGame.player2Score = player2.gameScore;
+        console.log(newGame);
+        scoreArray.push(newGame);
+    }
+
+    const updateScoreBoard = () => {
+        console.log("am displaying")
+        let rounds = document.querySelectorAll('tr');
+        console.log("rounds array:" + rounds)
+        let roundIndex;
+        let roundIndeces = [];
+        rounds.forEach(round => {
+            roundIndex = round.dataset.index;
+            console.log("dataset value" + roundIndex )
+            roundIndeces.push(roundIndex);
+            }
+           );
+
+    console.log("round indeces array: " + roundIndeces);
+        
+    scoreArray.forEach(score => {
+        let i = scoreArray.indexOf(score);
+        let imIncluded = roundIndeces.includes(index);
+        index = index.toString();
+        console.log(imIncluded)
+        console.log(index + "imIncluded in:  " + roundIndeces + "?")
+        if (roundIndeces.includes(index)) {
+            console.log(index + " is indcluded in " + roundIndeces )
+            return;
+        }
+        else {
+            addTableData(score, i);
+        }
+        });
+
+
+        const totals = document.getElementById('total');
+        if (totals != null){
+            totals.remove();
+        }
+        
+        let scoreTable = document.getElementById('score');
+        let total = document.createElement('tr');
+        total.id = 'total';
+        let player1Total = document.createElement('td');
+        let player2Total = document.createElement('td');
+        total.appendChild(player1Total);
+        total.appendChild(player2Total);
+        scoreTable.appendChild(total);
+        player1Total.textContent = player1.wins;
+        player2Total.textContent = player2.wins;
+    }
+
+    const addTableData = (score, roundIndex) => {
+        let scoreTable = document.getElementById('score');
         let roundRow = document.createElement('tr');
-        score.appendChild(roundRow);
+        roundRow.dataset.index = roundIndex;
+        scoreTable.appendChild(roundRow);
         let player1Score = document.createElement('td');
         let player2Score = document.createElement('td');
         roundRow.appendChild(player1Score);
         roundRow.appendChild(player2Score);
-        player1Score.textContent = player1.gameScore;
-        player2Score.textContent = player2.gameScore;
-        let player1Total = document.getElementById('player1-total');
-        let player2Total = document.getElementById('plaery2-total');
-        player1Total.textContent = player1.wins;
-        player2Total.textContent = player2.wins;
-
+        player1Score.textContent = score.player1Score;
+        player2Score.textContent = score.player2Score;
     }
 
     return {updateBoard, placeMarker, addListeners, startGame};
