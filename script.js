@@ -239,41 +239,16 @@ const gameController = () => {
     }
 
     const updateScoreBoard = () => {
-        console.log("am displaying")
-        let rounds = document.querySelectorAll('tr');
-        console.log("rounds array:" + rounds)
-        let roundIndex;
-        let roundIndeces = [];
-        rounds.forEach(round => {
-            roundIndex = round.dataset.rndIndex;
-            console.log("dataset value" + roundIndex )
-            roundIndeces.push(roundIndex);
-            }
-           );
+        console.log("updating score board");
+        let theScoreArray = Array.from(scoreArray);
+        let theScore = scoreArray[theScoreArray.length-1];
+        let i = scoreArray.indexOf(theScore);
+        addTableData (theScore, i);
 
-    console.log("round indeces array: " + roundIndeces);
-        
-    scoreArray.forEach(score => {
-        let i = scoreArray.indexOf(score);
-        i = i.toString();
-        let imIncluded = roundIndeces.includes(i);
-        console.log(imIncluded)
-        console.log(i + "imIncluded in:  " + roundIndeces + "?")
-        if (roundIndeces.includes(i)) {
-            console.log(i + " is indcluded in " + roundIndeces )
-            return;
-        }
-        else {
-            addTableData(score, i);
-        }
-        });
-
-
-        const totals = document.getElementById('total');
+    const totals = document.getElementById('total');
         if (totals != null){
             totals.remove();
         }
-        
         let scoreTable = document.getElementById('score');
         let total = document.createElement('tr');
         total.id = 'total';
@@ -287,10 +262,11 @@ const gameController = () => {
     }
 
     const addTableData = (score, roundIndex) => {
-        console.log(playsArray);
+        console.log("ADDING TABLE DATA")
         let table = document.getElementById('score');
         let roundRow = document.createElement('tr');
-        roundRow.dataset.rndIndex = roundIndex;
+        roundRow.dataset.rndindex = roundIndex;
+        roundRow.classList.add('rnd');
         console.log('the table element is: "'+ table);
         let player1Score = document.createElement('td');
         let player2Score = document.createElement('td');
@@ -299,7 +275,6 @@ const gameController = () => {
         roundRow.appendChild(player2Score);
         player1Score.textContent = score.player1Score;
         player2Score.textContent = score.player2Score;
-        console.log(playsArray);
     }
 
     return {updateBoard, placeMarker, addListeners, startGame};
