@@ -127,8 +127,11 @@ body {
     border-bottom: solid 1px rgb(100, 113, 121);
 }
 
-.form {
+#form {
     display: none;
+    width: 300px;
+    height: 260px;
+    position: fixed;
 }
 
 form {

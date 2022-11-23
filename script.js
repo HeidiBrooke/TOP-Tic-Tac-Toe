@@ -193,6 +193,7 @@ const gameController = () => {
     }
     
     const startGame = () => {
+        closeForm();
         console.log("starting game")
         runGame.addListeners();
         gameOver = false;
@@ -277,7 +278,34 @@ const gameController = () => {
         player2Score.textContent = score.player2Score;
     }
 
-    return {updateBoard, placeMarker, addListeners, startGame};
+    const openForm = () => {
+        console.log('opening form')
+        let form = document.getElementById('form');
+        form.style.display ='block';
+    }
+
+    const closeForm = () => {
+        saveData();
+        console.log('closing form')
+        let form = document.getElementById('form');
+        form.style.display ='none';
+    }
+
+    const saveData = () => {
+        console.log('saving data')
+        player1.playerName = document.getElementById('player-1').value;
+        player2.playerName = document.getElementById('player-2').value;
+        console.log(player1.playerName);
+        console.log(player2.playerName);
+        let player1Display = document.getElementsByClassName('player1');
+        let player2Display = document.getElementsByClassName('player2');
+        player1Display[0].textContent = "P1: " + player1.playerName;
+        player2Display[0].textContent = "P2: " + player2.playerName;
+        document.getElementById('player1-score').textContent = player1.playerName;
+        document.getElementById('player2-score').textContent = player2.playerName;
+    }
+
+    return {updateBoard, placeMarker, addListeners, startGame, openForm};
     
 };
 
@@ -296,6 +324,7 @@ const defineWinsArrays = () => {
     return {h1, h2, h3, v1, v2, v3, d1, d2};
 }
 
+
 const winsArrayObject = defineWinsArrays();
 const winsArray = [winsArrayObject.h1, winsArrayObject.h2, 
     winsArrayObject.h3, winsArrayObject.v1,
@@ -304,8 +333,11 @@ const winsArray = [winsArrayObject.h1, winsArrayObject.h2,
 
 const runGame = gameController();
 let startBtn = document.getElementsByClassName('initiate');
+let start = document.getElementsByClassName('start');
 console.log(startBtn[0])
-startBtn[0].addEventListener('click', runGame.startGame);
+start[0].addEventListener('click', runGame.startGame);
+startBtn[0].addEventListener('click', runGame.openForm);
+
 
 
 // runGame.updateBoard();
