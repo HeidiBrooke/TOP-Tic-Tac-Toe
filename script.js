@@ -282,6 +282,17 @@ const gameController = () => {
         console.log('opening form')
         let form = document.getElementById('form');
         form.style.display ='block';
+        let overlay = document.getElementById('overlay');
+        overlay.style.display ='block';
+        let player1marker = document.getElementById('marker-1');
+        let player2marker = document.getElementById('marker-2');
+        player1marker.checked = true;
+        player2marker.checked = false;
+        console.log(player1marker, player2marker);
+        //player1marker.addEventListener('change', switchChecks(player1marker, player2marker));
+        //player2marker.addEventListener('change', switchChecks(player2marker, player1marker));
+        player1marker.addEventListener('change', switchChecks);
+        player2marker.addEventListener('change', switchChecks);
     }
 
     const closeForm = () => {
@@ -289,9 +300,30 @@ const gameController = () => {
         console.log('closing form')
         let form = document.getElementById('form');
         form.style.display ='none';
+        let overlay = document.getElementById('overlay');
+        overlay.style.display ='none';
+    }
+
+    const switchChecks = (e) => {
+        let otherMarker;
+        let player1marker = document.getElementById('marker-1');
+        let player2marker = document.getElementById('marker-2');
+        if(player1marker.id == e.target.id) {
+            otherMarker = player2marker;
+        }
+        else {
+            otherMarker = player1marker;
+        }
+
+        if(e.target.checked == true){
+            otherMarker.checked = false;
+            console.log('target e worked')
+        }
+        else {otherMarker.checked = true;}
     }
 
     const saveData = () => {
+        //names
         console.log('saving data')
         player1.playerName = document.getElementById('player-1').value;
         player2.playerName = document.getElementById('player-2').value;
@@ -303,9 +335,28 @@ const gameController = () => {
         player2Display[0].textContent = "P2: " + player2.playerName;
         document.getElementById('player1-score').textContent = player1.playerName;
         document.getElementById('player2-score').textContent = player2.playerName;
+        //markers
+        let player1marker = document.getElementById('marker-1');
+        let player2marker = document.getElementById('marker-2');
+        if(player1marker.checked == true){
+            player1.playerMarker = 'O';
+        }
+        else {
+            player1.playerMarker = 'X';
+        }
+        if(player2marker.checked == true){
+            player2.playerMarker = 'O';
+        }
+        else{
+            player2.playerMarker = 'X';
+        }
+
+        let playerMarkers = document.getElementsByClassName('marker');
+        playerMarkers[0].textContent = player1.playerMarker;
+        playerMarkers[1].textContent = player2.playerMarker;
     }
 
-    return {updateBoard, placeMarker, addListeners, startGame, openForm};
+    return {updateBoard, placeMarker, addListeners, startGame, openForm, closeForm};
     
 };
 
@@ -332,11 +383,14 @@ const winsArray = [winsArrayObject.h1, winsArrayObject.h2,
     winsArrayObject.d1, winsArrayObject.d2];
 
 const runGame = gameController();
+runGame.openForm();
 let startBtn = document.getElementsByClassName('initiate');
 let start = document.getElementsByClassName('start');
+let close = document.getElementsByClassName('close');
 console.log(startBtn[0])
 start[0].addEventListener('click', runGame.startGame);
 startBtn[0].addEventListener('click', runGame.openForm);
+close[0].addEventListener('click', runGame.closeForm);
 
 
 
