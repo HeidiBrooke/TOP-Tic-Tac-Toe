@@ -61,14 +61,26 @@
         <form>
             <div class="form-title">New Game</div>
             <div>
-                <label for="player-1">Player 1:</label>
+                <label for="player-1">Player 1:  </label>
                 <input type="text" id="player-1" name="player-1">
             </div>
             <div>
-                <label for="player-2">Player 2:</label>
+                <label class="switch" for="marker-1">
+                    <!-- X | O -->
+                    <div class="markers">
+                        <div class="X-toggle">X</div>
+                        <div class="O-toggle">O</div>
+                    </div>
+                    <input type="checkbox" id="marker-1" name="marker-1">
+                    <span class="slider"></span>
+                </label>
+                
+            </div>
+            <div>
+                <label for="player-2">Player 2:  </label>
                 <input type="text" id="player-2" name="player-2">
             </div>
-            <div class="rounds">Rounds:
+            <!-- <div class="rounds">Rounds:
                 <div>
                     <label for="rounds5">5</label>
                     <input type="checkbox" id="rounds" name="rounds">
@@ -77,7 +89,7 @@
                     <label for="rounds5">Unlimited</label>
                     <input type="checkbox" id="rounds" name="rounds">
                 </div>
-            </div>
+            </div> -->
             <div class="form-btns">
                 <div class="button close">Close</div>
                 <div class="button start">Start Game</div>
