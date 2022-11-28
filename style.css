@@ -73,6 +73,7 @@ body {
     text-overflow: wrap;
 }
 
+
 .initiate {
     border: solid 1px rgb(61, 69, 73);
 }
@@ -212,7 +213,7 @@ width: 120px;
 
 .ui>.message-board {
     display: flex;
-    height: 120px;
+    height: 200px;
     padding: 20px;
     align-items: center;
     justify-content: center;

@@ -150,7 +150,7 @@ const gameController = () => {
         }
 
         let player = getPlayer();
-        let message = "It is now " + player.playerName + "'s turn."
+        let message = player.playerName + "'s turn."
         let messageBoard = document.getElementsByClassName('message-board');
         messageBoard[0].textContent = message;
     }
@@ -200,6 +200,9 @@ const gameController = () => {
         playsArray = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
         const gameScore = (1, null, null);
         updateBoard();
+        let message = player1.playerName + "'s move."
+        let messageBoard = document.getElementsByClassName('message-board');
+        messageBoard[0].textContent = message;
     }
 
     const endGame = (winner) => {
@@ -327,6 +330,12 @@ const gameController = () => {
         console.log('saving data')
         player1.playerName = document.getElementById('player-1').value;
         player2.playerName = document.getElementById('player-2').value;
+        if(player1.playerName == ''){
+            player1.playerName = 'Player 1';
+        }
+        if(player2.playerName == ''){
+            player2.playerName = 'Player 2';
+        }
         console.log(player1.playerName);
         console.log(player2.playerName);
         let player1Display = document.getElementsByClassName('player1');
