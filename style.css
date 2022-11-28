@@ -64,8 +64,8 @@ body {
     border: solid 1px rgb(154, 173, 184);
     border: solid 1px rgb(46, 58, 65);
     border-radius: 16px;
-    height: 260px;
-    height: 400px;
+    height: 280px;
+    /* height: 400px; */
     width: 180px;
     gap: 8px;
     background-color: rgb(32, 41, 46);
@@ -90,8 +90,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 260px;
-    height: 260px;
+    width: 280px;
+    height: 280px;
     padding: 16px;
     border: solid 1px rgb(154, 173, 184);
     border: solid 1px rgb(135, 152, 161);
@@ -203,20 +203,37 @@ width: 120px;
     flex-wrap: wrap;
 }
 
+.score-holder {
+    height: 2000px;
+    overflow-y: scroll;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .score div {
     display: grid;
     grid-template-columns: 1fr;
     text-transform: uppercase;
     letter-spacing: 5px;
     font-weight: 700;
+    gap: 10px;
     
 }
+
+/* table {
+    display: block;
+    overflow-y: scroll;
+} */
 
 #score {
     padding: 8px;
     border-collapse: collapse;
     border: solid 1px rgb(76, 87, 94);
     border-style: hidden;
+    width: 100%;
+    
 }
 #score th {
     padding: 4px;
@@ -224,15 +241,19 @@ width: 120px;
     text-transform: uppercase;
     font-weight: 400;
     font-size: .6rem;
+    border-right: solid 1px rgb(76, 87, 94);
     /* border-style: hidden; */
 }
 
 #score td {
-
     border: solid 1px rgb(76, 87, 94);
     text-transform: uppercase;
     font-weight: 200;
     font-size: .7rem;
+}
+
+#score col {
+    width: 50%;
 }
 
 table {
