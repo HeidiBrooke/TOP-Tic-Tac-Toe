@@ -60,25 +60,37 @@
     <div class="form holder" id="form">
         <form>
             <div class="form-title">New Game</div>
-            <div>
-                <label for="player-1">Player 1:  </label>
-                <input type="text" id="player-1" name="player-1">
+            <div class="p-info">
+                <!-- <div> -->
+                    <label for="player-1">Player 1:  </label>
+                    <input type="text" id="player-1" name="player-1">
+                <!-- </div> -->
+                <div>
+                    <label class="switch" for="marker-1">
+                        <!-- X | O -->
+                        <div class="markers">
+                            <div class="X-toggle">X</div>
+                            <div class="O-toggle">O</div>
+                        </div>
+                        <input type="checkbox" id="marker-1" name="marker-1">
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </div>
-            <div>
-                <label class="switch" for="marker-1">
-                    <!-- X | O -->
-                    <div class="markers">
-                        <div class="X-toggle">X</div>
-                        <div class="O-toggle">O</div>
-                    </div>
-                    <input type="checkbox" id="marker-1" name="marker-1">
-                    <span class="slider"></span>
-                </label>
-                
-            </div>
-            <div>
+            <div class="p-info">
                 <label for="player-2">Player 2:  </label>
                 <input type="text" id="player-2" name="player-2">
+                <div>
+                    <label class="switch" for="marker-2">
+                        <!-- X | O -->
+                        <div class="markers">
+                            <div class="X-toggle">X</div>
+                            <div class="O-toggle">O</div>
+                        </div>
+                        <input type="checkbox" id="marker-2" name="marker-2">
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </div>
             <!-- <div class="rounds">Rounds:
                 <div>
