@@ -243,7 +243,15 @@ const gameController = () => {
         player2.turnTally = 0;
     }
 
+    const resetScore = () => {
+        player1.wins = 0;
+        player1.losses = 0;
+        player2.wins = 0;
+        player2.losses = 0;
+    }
+
     const gameReset = () => {
+        resetScore();
         resetTurnTallys();
         console.log("reseting!")
         gameOver = true;
