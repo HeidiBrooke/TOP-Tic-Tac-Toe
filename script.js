@@ -72,6 +72,8 @@ const gameController = () => {
         let winningMarker;
         console.log("checking for win!")
         console.log(winsArray)
+        let line;
+        let strike;
         winsArray.forEach(array => {
             let spaceIndex1 = array[0];
             let spaceIndex2 = array[1];
@@ -88,83 +90,87 @@ const gameController = () => {
                     console.log("they all match!"); 
                     winningMarker = marker1.textContent;
                     console.log("winning marker is: " + winningMarker);  
-                    let line = winsArray.indexOf(array);
+                    line = winsArray.indexOf(array);
                     console.log('index of win array ' + line)
-                    let strike;
-                    switch(line){
-                        case 0:
-                            strike = document.getElementsByClassName('horiz');
-                            strike[0].style.top = '55px';
-                            strike[0].style.right = '10';
-                            strike[0].style.display = 'block';
-                            break;
-                        case 1:
-                            strike = document.getElementsByClassName('horiz');
-                            strike[0].style.top = '135px';
-                            strike[0].style.right = '10';
-                            strike[0].style.display = 'block';
-                            break;
-                        case 2:
-                            strike = document.getElementsByClassName('horiz');
-                            strike[0].style.top = '220px';
-                            strike[0].style.right = '10';
-                            strike[0].style.display = 'block';
-                            break;
-                        case 3:
-                            strike = document.getElementsByClassName('vert');
-                            strike[0].style.top = '10';
-                            strike[0].style.right = '220px';
-                            strike[0].style.display = 'block';
-                            break;
-                        case 4:
-                            strike = document.getElementsByClassName('vert');
-                            strike[0].style.top = '10';
-                            strike[0].style.right = '135px';
-                            strike[0].style.display = 'block';
-                            break;
-                        case 5:
-                            strike = document.getElementsByClassName('vert');
-                            strike[0].style.top = '10';
-                            strike[0].style.right = '55px';
-                            strike[0].style.display = 'block';
-                            break;
-                        case 6:
-                            strike = document.getElementsByClassName('vert');
-                            strike[0].style.top = '10';
-                            strike[0].style.right = '135px';
-                            strike[0].style.display = 'block';
-                            strike[0].style.transform = 'rotate(-45deg)';
-                            // strike[0].style.transform-origin = '0% 0%';
-                            break;
-                        case 7:
-                            strike = document.getElementsByClassName('vert');
-                            strike[0].style.top = '10';
-                            strike[0].style.right = '135px';
-                            strike[0].style.display = 'block';
-                            strike[0].style.transform = 'rotate(45deg)';
-                            // strike[0].style.transform-origin = '0% 0%';
-                            break;
-
-                            
-                    }
-                    // {h1, h2, h3, v1, v2, v3, d1, d2};
+                    
+                    
+                    
                     
                 }
             }
+            console.log('line is ' + line);
+            switch(line){
+                case 0:
+                    strike = document.getElementsByClassName('horiz');
+                    strike[0].style.top = '55px';
+                    strike[0].style.right = '10';
+                    strike[0].style.display = 'block';
+                    break;
+                case 1:
+                    strike = document.getElementsByClassName('horiz');
+                    strike[0].style.top = '135px';
+                    strike[0].style.right = '10';
+                    strike[0].style.display = 'block';
+                    break;
+                case 2:
+                    strike = document.getElementsByClassName('horiz');
+                    strike[0].style.top = '220px';
+                    strike[0].style.right = '10';
+                    strike[0].style.display = 'block';
+                    break;
+                case 3:
+                    strike = document.getElementsByClassName('vert');
+                    strike[0].style.top = '10';
+                    strike[0].style.right = '220px';
+                    strike[0].style.display = 'block';
+                    strike[0].style.transform = 'rotate(0deg)';
+                    break;
+                case 4:
+                    strike = document.getElementsByClassName('vert');
+                    strike[0].style.top = '10';
+                    strike[0].style.right = '135px';
+                    strike[0].style.display = 'block';
+                    strike[0].style.transform = 'rotate(0deg)';
+                    break;
+                case 5:
+                    strike = document.getElementsByClassName('vert');
+                    strike[0].style.top = '10';
+                    strike[0].style.right = '55px';
+                    strike[0].style.display = 'block';
+                    strike[0].style.transform = 'rotate(0deg)';
+                    break;
+                case 6:
+                    strike = document.getElementsByClassName('vert');
+                    strike[0].style.top = '10';
+                    strike[0].style.right = '135px';
+                    strike[0].style.display = 'block';
+                    strike[0].style.transform = 'rotate(-45deg)';
+                    break;
+                case 7:
+                    strike = document.getElementsByClassName('vert');
+                    strike[0].style.top = '10';
+                    strike[0].style.right = '135px';
+                    strike[0].style.display = 'block';
+                    strike[0].style.transform = 'rotate(45deg)';
+                    break;                            
+            }
+            if ((player1.turnTally + player2.turnTally === 9) && (gameOver == false)){
+                gameOver = true;
+                let message = "That's a draw!"
+                let messageBoard = document.getElementsByClassName('message-board');
+                messageBoard[0].textContent = message;
+                endGame(0);
+            }
             
         });
-
+        
         if(gameOver) {
             console.log("game over!")
-            let message = "We have a winner!"
-            let messageBoard = document.getElementsByClassName('message-board');
-            console.log(messageBoard[0])
-            console.log(message)
-            messageBoard[0].textContent = message;
             endGame(winningMarker);
         }
 
     }
+
 
     const getPlayer = () => {
         let thePlayer = 0;
@@ -232,7 +238,13 @@ const gameController = () => {
 
     }
 
+    const resetTurnTallys = () => {
+        player1.turnTally = 0;
+        player2.turnTally = 0;
+    }
+
     const gameReset = () => {
+        resetTurnTallys();
         console.log("reseting!")
         gameOver = true;
         startGame();
@@ -274,6 +286,7 @@ const gameController = () => {
     }
 
     const endGame = (winner) => {
+        resetTurnTallys();
         logScore(winner);
         removeListeners();
 
@@ -282,20 +295,30 @@ const gameController = () => {
     const logScore = (theWinner) => {
         let gameWinner;
         let gameLoser;
-        players.playerArray.forEach(player => {
-            if (theWinner === player.playerMarker){  
-                gameWinner = player;
-            }
-            else {
-                gameLoser = player;
-            }
-        })
-        
-        gameWinner.wins++;
-        gameWinner.gameScore = 'W';
-        gameLoser.losses++;
-        gameLoser.gameScore = 'L';
-        console.log(gameWinner.wins);
+
+        if(theWinner === 0){
+            player1.gameScore = "Draw";
+            player2.gameScore = "Draw";
+        }
+        else {
+            players.playerArray.forEach(player => {
+                if (theWinner === player.playerMarker){  
+                    gameWinner = player;
+                }
+                else {
+                    gameLoser = player;
+                }
+            })
+            
+            gameWinner.wins++;
+            gameWinner.gameScore = 'W';
+            gameLoser.losses++;
+            gameLoser.gameScore = 'L';
+            console.log(gameWinner.wins);
+            let message = "We have a winner! Congratulations " + gameWinner.playerName  + "!";
+            let messageBoard = document.getElementsByClassName('message-board');
+            messageBoard[0].textContent = message;
+        }
         let firstPlayer = getPlayerByType(1);
         let secondPlayer = getPlayerByType(2);
         updateScoreArray(firstPlayer, secondPlayer);
@@ -410,8 +433,18 @@ const gameController = () => {
         let player2Display = document.getElementsByClassName('player2');
         player1Display[0].textContent = "P1: " + player1.playerName;
         player2Display[0].textContent = "P2: " + player2.playerName;
-        document.getElementById('player1-score').textContent = player1.playerName;
-        document.getElementById('player2-score').textContent = player2.playerName;
+        let player1Score = document.getElementById('player1-score');
+        let player2Score = document.getElementById('player2-score');
+        if(player1Score == null){
+            player1Score.textContent = " ";
+        }
+        if(player2Score == null){
+            player2Score.textContent = " ";
+        }
+        else {
+            player1Score.textContent = player1.playerName;
+            player2Score.textContent = player2.playerName;
+        }
         //markers
         let player1marker = document.getElementById('marker-1');
         let player2marker = document.getElementById('marker-2');
@@ -433,7 +466,25 @@ const gameController = () => {
         playerMarkers[1].textContent = player2.playerMarker;
     }
 
-    return {updateBoard, placeMarker, addListeners, startGame, openForm, closeForm};
+    const clearTable = () => {
+        let scores = document.getElementById('total');
+        scores.remove();
+        let tableElements = document.getElementsByClassName('rnd');
+        tableElements = Array.from(tableElements);
+        console.log('table elements to remove are: ' + tableElements);
+        tableElements.forEach(element => {
+            element.remove();
+        })
+    }
+
+    const clearAll = () => {
+        gameReset();
+        clearTable();
+        openForm();
+        
+    }
+
+    return {updateBoard, placeMarker, addListeners, startGame, openForm, closeForm, clearAll};
     
 };
 
@@ -467,6 +518,7 @@ let close = document.getElementsByClassName('close');
 console.log(startBtn[0])
 start[0].addEventListener('click', runGame.startGame);
 startBtn[0].addEventListener('click', runGame.openForm);
+startBtn[1].addEventListener('click', runGame.clearAll);
 close[0].addEventListener('click', runGame.closeForm);
 
 
