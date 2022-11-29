@@ -71,6 +71,7 @@ const gameController = () => {
     const checkForWin = () => {
         let winningMarker;
         console.log("checking for win!")
+        console.log(winsArray)
         winsArray.forEach(array => {
             let spaceIndex1 = array[0];
             let spaceIndex2 = array[1];
@@ -87,6 +88,49 @@ const gameController = () => {
                     console.log("they all match!"); 
                     winningMarker = marker1.textContent;
                     console.log("winning marker is: " + winningMarker);  
+                    let line = winsArray.indexOf(array);
+                    console.log('index of win array ' + line)
+                    let strike;
+                    switch(line){
+                        case 0:
+                            strike = document.getElementsByClassName('horiz');
+                            strike[0].style.top = '55px';
+                            strike[0].style.right = '10';
+                            strike[0].style.display = 'block';
+                            break;
+                        case 1:
+                            strike = document.getElementsByClassName('horiz');
+                            strike[0].style.top = '135px';
+                            strike[0].style.right = '10';
+                            strike[0].style.display = 'block';
+                            break;
+                        case 2:
+                            strike = document.getElementsByClassName('horiz');
+                            strike[0].style.top = '220px';
+                            strike[0].style.right = '10';
+                            strike[0].style.display = 'block';
+                            break;
+                        case 3:
+                            strike = document.getElementsByClassName('vert');
+                            strike[0].style.top = '10';
+                            strike[0].style.right = '220px';
+                            strike[0].style.display = 'block';
+                            break;
+                        case 4:
+                            strike = document.getElementsByClassName('vert');
+                            strike[0].style.top = '10';
+                            strike[0].style.right = '135px';
+                            strike[0].style.display = 'block';
+                            break;
+                        case 5:
+                            strike = document.getElementsByClassName('vert');
+                            strike[0].style.top = '10';
+                            strike[0].style.right = '55px';
+                            strike[0].style.display = 'block';
+                            break;
+                    }
+                    // {h1, h2, h3, v1, v2, v3, d1, d2};
+                    
                 }
             }
             
@@ -193,6 +237,12 @@ const gameController = () => {
     }
     
     const startGame = () => {
+        let line = document.getElementsByClassName('winnerLine');
+        let line1 = document.getElementById('horiz');
+        console.log(line1);
+        line1.style.display = 'none';
+        console.log(line1);
+        line[1].style.display = 'none';
         closeForm();
         console.log("starting game")
         runGame.addListeners();

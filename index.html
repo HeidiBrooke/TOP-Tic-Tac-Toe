@@ -38,6 +38,8 @@
             </div>
 
             <div class="board">
+                <div class="winnerLine horiz" id="horiz"></div>
+                <div class="winnerLine vert" id="'vert"></div>
                 <div class="grid">
                     <div class="cell cell1" data-index="0"> </div>
                     <div class="cell cell2" data-index="1"> </div>
@@ -48,23 +50,23 @@
                     <div class="cell cell7" data-index="6"> </div>
                     <div class="cell cell8" data-index="7"> </div>
                     <div class="cell cell9" data-index="8"> </div>
-                
+                    
                 </div>
             </div>
 
             <div class="ui display holder">
                 <div class="message-board">Let's play Tic-Tac-Toe!
-
                 </div>
                 <div class="btn" id="next-game">Next Game</div>
                 <div class="btn" id="reset">Reset</div>
                 <!-- <div class="btn" id="quit">Quit</div> -->
-
             </div>
 
         </div>
         <div class="initiate btn">Start Game</div>
     </div>
+
+    
 
     <div id="overlay"></div>
     <div class="form holder" id="form">

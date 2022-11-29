@@ -93,6 +93,7 @@ body {
 }
 
 .board{
+    position: relative;
     align-self: center;
     justify-self: center;
     display: flex;
@@ -239,11 +240,6 @@ width: 120px;
     
 }
 
-/* table {
-    display: block;
-    overflow-y: scroll;
-} */
-
 #score {
     padding: 8px;
     border-collapse: collapse;
@@ -252,6 +248,7 @@ width: 120px;
     width: 100%;
     
 }
+
 #score th {
     padding: 4px;
     border-bottom: solid 1px rgb(76, 87, 94);
@@ -355,4 +352,35 @@ input:checked + .slider::before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
+}
+
+.horiz {
+    display: none;
+    height: 3px;
+    width: 250px;
+    background-color: rgb(202, 225, 238);
+    position: absolute;
+    /* position 1 */
+    /* top: 55px;
+    right: 10; */
+    /* position 2 */
+    /* top: 135px;
+    right: 10; */
+    /* position 3 */
+    /* top: 220px;
+    right: 10; */
+}
+
+.vert {
+    display: none;
+    background-color: rgb(202, 225, 238);
+    position: absolute;
+    height:250px;
+    width: 3px;
+    /* position 2 */
+    /* right: 55px;
+    top: 10; */
+    /* position 3 */
+    /* top: 10;
+    right: 220px; */
 }
