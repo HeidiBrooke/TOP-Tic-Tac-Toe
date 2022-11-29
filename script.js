@@ -128,6 +128,24 @@ const gameController = () => {
                             strike[0].style.right = '55px';
                             strike[0].style.display = 'block';
                             break;
+                        case 6:
+                            strike = document.getElementsByClassName('vert');
+                            strike[0].style.top = '10';
+                            strike[0].style.right = '135px';
+                            strike[0].style.display = 'block';
+                            strike[0].style.transform = 'rotate(-45deg)';
+                            // strike[0].style.transform-origin = '0% 0%';
+                            break;
+                        case 7:
+                            strike = document.getElementsByClassName('vert');
+                            strike[0].style.top = '10';
+                            strike[0].style.right = '135px';
+                            strike[0].style.display = 'block';
+                            strike[0].style.transform = 'rotate(45deg)';
+                            // strike[0].style.transform-origin = '0% 0%';
+                            break;
+
+                            
                     }
                     // {h1, h2, h3, v1, v2, v3, d1, d2};
                     
